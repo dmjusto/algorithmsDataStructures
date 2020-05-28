@@ -1,4 +1,4 @@
-class newNode{
+class Node{
     constructor(value){
         this.value = value;
         this.next = null;
@@ -13,7 +13,7 @@ class SinglyLinkedList{
     }
 
     push(value){
-        let newNode = new newNode(value);
+        let newNode = new Node(value);
         if(this.head === null){
             this.head = newNode;
             this.tail = this.head;
@@ -43,4 +43,20 @@ class SinglyLinkedList{
         }
         return temp;
     }
+
+    shift(){
+        if(this.length === 0) return undefined;
+
+        let temp = this.head;
+        this.head = temp.next;
+        temp.next = null;
+        this.length--;
+        if(this.length === 0){
+            this.tail = null;
+        }
+
+        return temp;
+    }
 }
+
+module.exports = SinglyLinkedList;
