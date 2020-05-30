@@ -91,5 +91,34 @@ class SinglyLinkedList{
             return true;
         }
     }
+
+    insert(index, value){
+        if(index < 0 || index > this.length) return false;
+
+        if(index === this.length - 1) this.push(value); 
+        else if(index === 0) this.unshift(value);
+
+        else{
+            let prev = this.get(index - 1);
+            newNode.next = prev.next;
+            prev.next = newNode;
+            this.length++;
+        }
+        return true;
+    }
+    remove(index){
+        if(index < 0 || index >= this.length) return null;
+
+        if(index === this.length -1) this.pop;
+        else if(index === 0) this.shift();
+
+        else{
+            let prev = this.get(index - 1);
+            let temp = prev.next;
+            prev.next = temp.next;
+            this.length--;
+            return temp.value;
+        }
+    }
 }
 module.exports = SinglyLinkedList;
