@@ -120,5 +120,36 @@ class SinglyLinkedList{
             return temp.value;
         }
     }
+
+    reverse(){
+        if(this.length === 0) return;
+
+        let prev = null;
+        let current = this.head;
+        let next = current.next;
+        this.head = this.tail;
+        this.tail = current;
+
+        for(let i = 0; i < this.length; i++){
+            next = current.next;
+
+            //reverse connection
+            current.next = prev;
+            //move all nodes forward 1 position
+            prev = current;
+            current = next;
+        }
+        return this;
+    }
+    
+    print(){
+        let arr = []
+        let node = this.head;
+        while(node){
+            arr.push(node.value);
+            node = node.next;
+        }
+        console.log(arr);
+    }
 }
 module.exports = SinglyLinkedList;
