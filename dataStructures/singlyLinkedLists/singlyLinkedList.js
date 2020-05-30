@@ -57,6 +57,39 @@ class SinglyLinkedList{
 
         return temp;
     }
-}
+    unshift(value){
+        let newNode = new Node(value);
+        if(this.head === null){
+            this.head = newNode;
+            this.tail = this.head;
+        }
+        else{
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return newNode;
+    }
 
+    get(index){
+        if(index < 0 || index >= this.length) return null;
+
+        let counter = 0;
+        let temp = this.head;
+        while(counter < index){
+            temp = temp.next;
+            counter++;
+        }
+
+        return temp;
+    }
+    set(index, value){
+        let node = this.get(index);
+        if(!node)return false;
+        else{
+            node.value = value;
+            return true;
+        }
+    }
+}
 module.exports = SinglyLinkedList;
