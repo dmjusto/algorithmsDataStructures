@@ -23,6 +23,19 @@ class Stack{
         }
         return ++this.size;
     }
+    pop(){
+        if(this.size === 0) return null;
+
+        let popNode = this.first;
+        if(this.size === 1){
+            this.last = null
+        }
+        
+        this.first = popNode.next;
+        popNode.next = null;
+        this.size--;
+        return popNode.data;
+    }
 
     print(){
         let arr = [];
@@ -41,4 +54,12 @@ stack.print();
 stack.push(2);
 stack.print();
 stack.push(3);
+stack.print();
+stack.pop();
+stack.print();
+stack.pop();
+stack.print();
+stack.pop();
+stack.print();
+stack.pop();
 stack.print();
