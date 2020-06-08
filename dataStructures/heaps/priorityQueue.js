@@ -1,7 +1,7 @@
-//PRIORITY QUEUE IMPLEMENTED WITH MAX BINARY HEAP
+//PRIORITY QUEUE IMPLEMENTED WITH MIN BINARY HEAP
 class Node{
-    constructor(val, priority){
-        this.val = val;
+    constructor(value, priority){
+        this.value = value;
         this.priority = priority;
     }
 }
@@ -11,15 +11,15 @@ class PriorityQueue{
         this.values = [];
     }
 
-    Enqueue(val, priority){
-        let newNode = new Node(val, priority);
+    enqueue(value, priority){
+        let newNode = new Node(value, priority);
         this.values.push(newNode);
         this.BubbleUp();
         
         return this;
     }
 
-    DeQueue(){
+    dequeue(){
         const max = this.values[0];
         const endElement = this.values.pop();
         if(this.values.length > 0){
@@ -43,13 +43,13 @@ class PriorityQueue{
 
             if(leftChildIndex < length ){
                 leftChild = this.values[leftChildIndex];
-                if(leftChild.priority > element.priority) swapIndex = leftChildIndex;
+                if(leftChild.priority < element.priority) swapIndex = leftChildIndex;
             }
             if(rightChildIndex < length){
                 rightChild = this.values[rightChildIndex];
                 if(
-                    (!swapIndex && rightChild.priority > element.priority) || 
-                    (swapIndex && rightChild.priority > leftChild.priority)
+                    (!swapIndex && rightChild.priority < element.priority) || 
+                    (swapIndex && rightChild.priority < leftChild.priority)
                 ){
                     swapIndex = rightChildIndex;
                 }
@@ -70,7 +70,7 @@ class PriorityQueue{
         while(index > 0){
             const parentIndex = Math.floor((index -1)/2);
             const parent = this.values[parentIndex];
-            if(element.priority <= parent.priority) break;
+            if(element.priority >= parent.priority) break;
             this.values[parentIndex] = element;
             this.values[index] = parent;
             index = parentIndex;
@@ -78,14 +78,16 @@ class PriorityQueue{
     }
 }
 
-var queue = new PriorityQueue();
-queue.Enqueue(2, 2);
-queue.Enqueue(3, 3);
-queue.Enqueue(4, 4);
-queue.Enqueue(5, 5);
-queue.Enqueue(6, 6);
-queue.Enqueue(7, 7);
-queue.Enqueue(1, 1);
-console.log(queue.values);
-queue.DeQueue();
-console.log(queue.values);
+module.exports = PriorityQueue;
+
+// var queue = new PriorityQueue();
+// queue.enqueue(2, 2);
+// queue.enqueue(3, 3);
+// queue.enqueue(4, 4);
+// queue.enqueue(5, 5);
+// queue.enqueue(6, 6);
+// queue.enqueue(7, 7);
+// queue.enqueue(1, 1);
+// console.log(queue.values);
+// queue.dequeue();
+// console.log(queue.values);
